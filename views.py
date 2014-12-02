@@ -1,4 +1,4 @@
-from flask import render_template, request
+from flask import render_template, request, url_for
 from app import app
 from schedule_api import get_terms, get_schools
 
@@ -12,12 +12,31 @@ def index():
 
     return render_template('index.html', **options)
 
-@app.route('/win15')
-def win15():
+@app.route('/terms/<term_code>')
+
+def schools(term_code):
     options = {}
     try:
-        options['schools'] = get_schools(2020)
+        options['schools'] = get_schools(term_code)
+        options['terms'] = get_terms()
+        options['TermCode'] = str(term_code)
     except:
         options['api_error'] = True
 
-    return render_template('win15.html', **options)
+    return render_template('schools.html', **options)
+
+'''
+@app.route('/terms/<term_code>/<school_code>')
+
+def courses(term_code,school_code):
+    options = {}
+    try:
+        options['schools'] = get_schools(term_code)
+        options['terms'] = get_terms()
+        options['TermCode'] = str(term_code)
+    except:
+        options['api_error'] = True
+
+    return render_template('schools.html', **options)
+
+'''
