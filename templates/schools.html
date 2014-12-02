@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+
+{% for term in terms %}
+    {% if term['TermCode'] == TermCode %}
+    	<h1>{{term['TermDescr']}}</h1>
+    {% endif %}
+{% endfor %}
+
+
+<br><h2> The schools returned from the schedule API are: </h2>
+{% for school in schools %}
+    {{ school['SchoolDescr']}}<br>
+{% endfor %}
+
+{% if api_error %}
+<b>Getting the API terms failed!</b>
+Did you set the API token?
+{% endif %}
+
+{% endblock %}

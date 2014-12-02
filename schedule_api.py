@@ -70,6 +70,7 @@ def get_terms():
     '''
     return get_data('/Curriculum/SOC/v1/Terms')['getSOCTermsResponse']['Term']
 
+
 def get_schools(term_code):
     '''
     todo
