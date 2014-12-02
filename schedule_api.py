@@ -69,3 +69,11 @@ def get_terms():
         ('TermCode', 'TermDescr', 'TermShortDescr') 
     '''
     return get_data('/Curriculum/SOC/v1/Terms')['getSOCTermsResponse']['Term']
+
+def get_schools(term_code):
+    '''
+    todo
+    '''
+    term = str(term_code)
+    path = '/Curriculum/SOC/v1/Terms/' + term + '/Schools'
+    return get_data(path)['getSOCSchoolsResponse']['School']
