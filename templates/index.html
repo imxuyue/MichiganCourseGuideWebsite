@@ -1,18 +1,72 @@
-{% extends "base.html" %}
+	<!DOCTYPE html>
+	<html>
+	<head><title>4 Scheduler</title>
+		<link rel="icon" href="http://umich.edu/favicon.ico" type="image/x-icon">
+		<style>
+		body{
+			background-color: rgb(0,27,60);
+			color: rgb(255,255,255);
 
-{% block content %}
+		}
+		</style>
+	</head>
+	<html>
 
-<h1> Welcome to your starter code! </h1>
-Do some experimenting and make some changes.
+	{% extends "base.html" %}
 
-<br><h2> The terms returned from the schedule API are: </h2>
-{% for term in terms %}
-    <a href="/win15">{{ term['TermDescr']}}</a><br>
-{% endfor %}
+	{% block content %}
+	<br><br><br><br>
+	<h1> <b> 4 Scheduler </b> </h1>
+	<style type="text/css">
+	h1{
+		font-family: Courier;
+		text-align: center;
+	}
+	h2{
+		font-family: Comic Sans MS;
+	}
+	</style>
 
-{% if api_error %}
-<b>Getting the API terms failed!</b>
-Did you set the API token?
-{% endif %}
+	<br><br>
 
-{% endblock %}
+	<h2>
+		<table align="center">
+			<tr>
+				<th scope = "col" align = "center"> Term </th>
+				<th scope = "col" align = "center"> Term Code </th>
+			</tr>
+
+			{% for term in terms %}
+			<tr>
+				<td width="300" align = "center"> {{ term['TermDescr'] }} </td>
+				<td width="300" align = "center"> {{ term ['TermCode'] }} </td>
+			</tr>
+			{% endfor %}
+		</tabel>
+	</h2>
+
+	<h3>
+		<table align="center">
+			<tr> 
+				<td> please enter a term code: <td> </tr>
+					<br>
+					<tr> <td align="center">
+						<form action = "./schools" method = "get">
+						<input name =  "TermCode" type = "text"/>
+						<input type = "submit" value = "submit"/>  
+					</form></td>
+				</tr> 
+			</table>
+		</h3>
+
+
+
+
+
+
+		{% if api_error %}
+		<b>Getting the API terms failed!</b>
+		Did you set the API token?
+		{% endif %}
+     <!-- Xiaoran Xu-->
+		{% endblock %}
