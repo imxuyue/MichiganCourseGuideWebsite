@@ -5,9 +5,9 @@
 <h1> Welcome to your starter code! </h1>
 Do some experimenting and make some changes.
 
-<br><h2> The terms returned from the schedule API are: </h3>
+<br><h2> The terms returned from the schedule API are: </h2>
 {% for term in terms %}
-    {{ term['TermDescr'] }}<br>
+    <a href="/win15">{{ term['TermDescr']}}</a><br>
 {% endfor %}
 
 {% if api_error %}
