@@ -1,15 +1,31 @@
 <!doctype html>
 <html>
-  <head>
-    {% block head %}
-    <title>title for your pages</title>
+<head>
+  {% block head %}
+  <title>4 Scheduler</title>
+  <link rel="icon" href="http://umich.edu/favicon.ico" type="image/x-icon">
+  <style>
+  body{
+    background-color: rgb(0,27,60);
+    color: rgb(255,255,255);
+    text-align: center;
+  }
+  h1{
+    font-family: Courier;
+  }
+  h2,h3{
+    font-family: Comic Sans MS;
+  }
+
+  </style>
+
+  {% endblock %}
+</head>
+<body>
+  <div id="content">{% block content %}{% endblock %}</div>
+  <div id="footer">
+    {% block footer %}
     {% endblock %}
-  </head>
-  <body>
-    <div id="content">{% block content %}{% endblock %}</div>
-    <div id="footer">
-      {% block footer %}
-      {% endblock %}
-    </div>
-  </body>
+  </div>
+</body>
 </html>

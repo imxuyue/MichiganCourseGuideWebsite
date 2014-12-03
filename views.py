@@ -1,6 +1,6 @@
 from flask import render_template, request, url_for
 from app import app
-from schedule_api import get_terms, get_schools
+from schedule_api import get_terms, get_schools, get_subjects
 
 @app.route('/')
 def index():
@@ -25,18 +25,17 @@ def schools(term_code):
 
     return render_template('schools.html', **options)
 
-'''
-@app.route('/terms/<term_code>/<school_code>')
+@app.route('/terms/<term_code>/<schoolcode>')
 
-def courses(term_code,school_code):
+def subjects(term_code,schoolcode):
     options = {}
     try:
+        options['subjects'] = get_subjects(term_code, schoolcode)
+        options['SchoolCode'] = schoolcode
         options['schools'] = get_schools(term_code)
         options['terms'] = get_terms()
         options['TermCode'] = str(term_code)
     except:
         options['api_error'] = True
 
-    return render_template('schools.html', **options)
-
-'''
+    return render_template('subjects.html', **options)

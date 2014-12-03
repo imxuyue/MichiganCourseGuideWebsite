@@ -10,17 +10,23 @@
 {% endif %}
 {% endfor %}
 
+{% for school in schools %}
+{% if school['SchoolCode'] == SchoolCode %}
+<h2>{{school['SchoolDescr']}}</h2>
+{% endif %}
+{% endfor %}
+
 
 <br>
-<h2>
+<h3>
 	<table align="center">
 		<tr>
-			<th scope = "col" align = "center"> School: </th>
+			<th scope = "col" align = "center"> Subjects: </th><br>
 		</tr>
 
-		{% for school in schools %}
+		{% for subject in subjects %}
 		<tr>
-			<td width="500" align = "center">  <a href = "/terms/{{TermCode}}/{{ school['SchoolCode']}}">{{ school['SchoolDescr'] }} </a></td>
+			<td width="500" align = "center"> {{ subject['SubjectDescr']}} </a></td>
 		</tr>
 		{% endfor %}
 
