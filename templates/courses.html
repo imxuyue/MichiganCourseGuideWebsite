@@ -3,7 +3,6 @@
 {% block content %}
 
 
-
 {% for term in terms %}
 {% if term['TermCode'] == TermCode %}
 <h1>{{term['TermDescr']}}</h1>
@@ -16,17 +15,21 @@
 {% endif %}
 {% endfor %}
 
+{% for subject in subjects %}
+{% if subject['SubjectCode'] == SubjectCode %}
+<h3> {{subject['SubjectDescr']}}</h3>
+{% endif %}
+{% endfor %}
 
-<br>
-<h3>
+<h4>
 	<table align="center">
 		<tr>
-			<th scope = "col" align = "center"> Subjects: </th><br>
+			<th scope = "col" align = "center"> Classes Offered: </th><br>
 		</tr>
 
-		{% for subject in subjects %}
+		{% for course in courses %}
 		<tr>
-			<td width="500" align = "center"> <a href = "/terms/{{TermCode}}/{{SchoolCode}}/{{ subject['SubjectCode'] }}"> {{ subject['SubjectDescr']}} </a></td>
+			<td align = "left"> {{ SubjectCode }} {{ course['CatalogNumber'] }} - {{ course['CourseDescr']}} </a></td>
 		</tr>
 		{% endfor %}
 

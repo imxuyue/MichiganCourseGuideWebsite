@@ -82,6 +82,11 @@ def get_schools(term_code):
 
 def get_subjects(term_code, schoolcode):
     term = str(term_code)
-    school = schoolcode
-    path = '/Curriculum/SOC/v1/Terms/' + term + '/Schools/' + school + '/Subjects'
+    path = '/Curriculum/SOC/v1/Terms/' + term + '/Schools/' + schoolcode + '/Subjects'
     return get_data(path)['getSOCSubjectsResponse']['Subject']
+
+
+def get_courses(term_code, schoolcode, subjectcode):
+    term = str(term_code)
+    path = '/Curriculum/SOC/v1/Terms/' + term + '/Schools/' + schoolcode + '/Subjects/' + subjectcode + '/CatalogNbrs'
+    return get_data(path) ['getSOCCtlgNbrsResponse']['ClassOffered']
