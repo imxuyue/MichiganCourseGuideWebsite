@@ -5,28 +5,20 @@
 
 
 {% for term in terms %}
-{% if term['TermCode'] == TermCode %}
-<h1>{{term['TermDescr']}}</h1>
-{% endif %}
+    {% if term['TermCode'] == TermCode %}
+    	<h1>{{term['TermDescr']}}</h1>
+    {% endif %}
 {% endfor %}
 
 
-<br>
-<h2>
-	<table align="center">
-		<tr>
-			<th scope = "col" align = "center"> School: </th>
-		</tr>
+<br><h2> The schools returned from the schedule API are: </h2>
+{% for school in schools %}
+    <a href = "/terms/{{TermCode}}/schools/{{ school['SchoolCode']}}">{{ school['SchoolDescr']}}</a><br>
+{% endfor %}
 
-		{% for school in schools %}
-		<tr>
-			<td width="500" align = "center">  <a href = "/terms/{{TermCode}}/{{ school['SchoolCode']}}"> {{ school['SchoolDescr'] }} </a></td>
-		</tr>
-		{% endfor %}
+{% if api_error %}
+<b>Getting the API terms failed!</b>
+Did you set the API token?
+{% endif %}
 
-		{% if api_error %}
-		<b>Getting the API terms failed!</b>
-		Did you set the API token?
-		{% endif %}
-
-		{% endblock %}
+{% endblock %}

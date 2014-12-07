@@ -5,29 +5,24 @@
 
 
 {% for term in terms %}
-{% if term['TermCode'] == TermCode %}
-<h1>{{term['TermDescr']}}</h1>
-{% endif %}
+	{% if term['TermCode'] == TermCode %}
+		<h1>{{term['TermDescr']}}</h1>
+	{% endif %}
 {% endfor %}
 
 {% for school in schools %}
-{% if school['SchoolCode'] == SchoolCode %}
-<h2>{{school['SchoolDescr']}}</h2>
-{% endif %}
+	{% if school['SchoolCode'] == SchoolCode %}
+		<h2>{{school['SchoolDescr']}}</h2>
+	{% endif %}
 {% endfor %}
 
 
-<br>
-<h3>
-	<table align="center">
-		<tr>
-			<th scope = "col" align = "center"> Subjects: </th><br>
-		</tr>
+ <h2>Subjects:</h2>
+		
 
 		{% for subject in subjects %}
-		<tr>
-			<td width="500" align = "center"> <a href = "/terms/{{TermCode}}/{{SchoolCode}}/{{ subject['SubjectCode'] }}"> {{ subject['SubjectDescr']}} </a></td>
-		</tr>
+		<a href = "/terms/{{TermCode}}/schools/{{SchoolCode}}/subjects/{{subject['SubjectCode']}}">{{ subject['SubjectDescr']}} </a><br>
+	
 		{% endfor %}
 
 		{% if api_error %}

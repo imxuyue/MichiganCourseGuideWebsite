@@ -79,14 +79,33 @@ def get_schools(term_code):
     path = '/Curriculum/SOC/v1/Terms/' + term + '/Schools'
     return get_data(path)['getSOCSchoolsResponse']['School']
 
-
-def get_subjects(term_code, schoolcode):
+def get_subjects(term_code, school_code):
     term = str(term_code)
-    path = '/Curriculum/SOC/v1/Terms/' + term + '/Schools/' + schoolcode + '/Subjects'
+    school = school_code
+    path = '/Curriculum/SOC/v1/Terms/' + term + '/Schools/' + school + '/Subjects'
     return get_data(path)['getSOCSubjectsResponse']['Subject']
 
-
-def get_courses(term_code, schoolcode, subjectcode):
+def get_courses(term_code, school_code, subject_code):
     term = str(term_code)
-    path = '/Curriculum/SOC/v1/Terms/' + term + '/Schools/' + schoolcode + '/Subjects/' + subjectcode + '/CatalogNbrs'
-    return get_data(path) ['getSOCCtlgNbrsResponse']['ClassOffered']
+    school = str(school_code)
+    subject = str(subject_code)
+    path = '/Curriculum/SOC/v1/Terms/' + term + '/Schools/' + school + '/Subjects/' + subject +'/CatalogNbrs'
+    return get_data(path)['getSOCCtlgNbrsResponse']['ClassOffered']
+
+def get_course_descr(term_code, school_code, subject_code, course_code):
+    term = str(term_code)
+    school = str(school_code)
+    subject = str(subject_code)
+    course = str(course_code)
+    path = '/Curriculum/SOC/v1/Terms/' + term + '/Schools/' + school + '/Subjects/' + subject +'/CatalogNbrs/' + course
+    return get_data(path)['getSOCCourseDescrResponse']['CourseDescr']
+
+def get_sections(term_code, school_code, subject_code, course_code):
+    term = str(term_code)
+    school = str(school_code)
+    subject = str(subject_code)
+    course = str(course_code)
+    path = '/Curriculum/SOC/v1/Terms/' + term + '/Schools/' + school + '/Subjects/' + subject +'/CatalogNbrs/' + \
+            course + '/Sections'
+    return list(get_data(path)['getSOCSectionsResponse']['Section'])
+

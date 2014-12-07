@@ -2,28 +2,17 @@
 
 {% block content %}
 
-<br><br><br><br>
-<h1> <b> 4 Scheduler </b> </h1>
+<h1> Welcome to your starter code! </h1>
+Do some experimenting and make some changes.
 
+<br><h2> The terms returned from the schedule API are: </h2>
+{% for term in terms %}
+    <a href="/terms/{{ term['TermCode']}}">{{ term['TermDescr']}} </a> <br>
+{% endfor %}
 
+{% if api_error %}
+<b>Getting the API terms failed!</b>
+Did you set the API token?
+{% endif %}
 
-<br><br>
-<h2>
-	<table align="center">
-		<tr>
-			<th scope = "col" align = "center"> Term: </th>
-		</tr>
-
-		{% for term in terms %}
-		<tr>
-			<td width="300" align = "center"> <a href = "/terms/{{ term['TermCode']}}"> {{ term['TermDescr'] }} </a></td>
-		</tr>
-		{% endfor %}
-
-
-		{% if api_error %}
-		<b>Getting the API terms failed!</b>
-		Did you set the API token?
-		{% endif %}
-
-		{% endblock %}
+{% endblock %}
