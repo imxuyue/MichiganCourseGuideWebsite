@@ -1,4 +1,4 @@
-from flask import render_template, request, url_for, session
+from flask import render_template, request, url_for, session, redirect
 from app import app
 from schedule_api import get_terms, get_schools, get_subjects, get_courses, get_course_descr, get_sections
 import json, types
@@ -77,6 +77,7 @@ def course_info(term_code, school_code, subject_code, course_code):
         session['backpack'][request.form['submitButton']] = []
         session['backpack'][request.form['submitButton']].append(request.form['param1'])
         session['backpack'][request.form['submitButton']].append(request.form['param2'])
+        return redirect ("/backpack")
     
     try:
 
