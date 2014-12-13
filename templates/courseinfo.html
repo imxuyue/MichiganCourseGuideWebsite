@@ -2,6 +2,8 @@
 
 {% block content %}
 
+<a href="/backpack">backpack</a>
+
 {% for term in terms %}
 	{% if term['TermCode'] == TermCode %}
 		<h1>{{term['TermDescr']}}</h1>
@@ -32,13 +34,28 @@
 </div>
 
 <div>
-	Sections:<br>
-
+	<h3>Sections:</h3>
+	<ul>
 	{% for section in sections %}
+		<li>{{section['SectionNumber']}}</li>
+		<li>{{section['SectionTypeDescr']}}</li>
 		
+		<form method="post">
+    		<input type="hidden" name="param1" value="day" />
+    		<input type="hidden" name="param2" value="time" />
+    		<button type="submit" name="submitButton" value="{{SubjectCode}}{{CourseCode}}_{{section['SectionNumber']}}">backpack!</button>
+		</form>
+
+		 <button onClick="window.open( '/backpack', '_blank' )">Cat</button>
+
 	{% endfor %}
-	
+	</ul>
 </div>
+
+{% if api_error %}
+<b>Getting the API terms failed!</b>
+Did you set the API token?
+{% endif %}
 
 
 

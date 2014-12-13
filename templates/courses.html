@@ -26,4 +26,10 @@
 	<a href = "/terms/{{TermCode}}/schools/{{SchoolCode}}/subjects/{{SubjectCode}}/courses/{{course['CatalogNumber']}}">{{SubjectCode}} {{ course['CatalogNumber']}} - {{course['CourseDescr']}}</a>	<br>	
 {% endfor %}
 
+{% if api_error %}
+<b>Getting the API terms failed!</b>
+Did you set the API token?
+{% endif %}
+
+
 {% endblock %}

@@ -2,9 +2,6 @@
 
 {% block content %}
 
-<h1> Welcome to your starter code! </h1>
-Do some experimenting and make some changes.
-
 <br><h2> The terms returned from the schedule API are: </h2>
 {% for term in terms %}
     <a href="/terms/{{ term['TermCode']}}">{{ term['TermDescr']}} </a> <br>
@@ -14,5 +11,9 @@ Do some experimenting and make some changes.
 <b>Getting the API terms failed!</b>
 Did you set the API token?
 {% endif %}
+
+ 
+<h2><a href = "/backpack" target="_blank">backpack</a></h2>
+
 
 {% endblock %}

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{{session['backpack']}}
+
+<h2> classes backpacked: </h2>
+
+{% for class in backpack %}
+<div> 
+    <ul>
+    	<li>{{ class }}</li>
+		<ul>
+			{% for item in backpack[class] %}
+    			<li>{{item}}</li>
+    		{% endfor %}
+    	</ul>
+    </ul>
+</div>
+<form method="post" >	
+    <input type="hidden" name="param1" value="{{class}}" />
+    <input type="submit" name="submitButton" value="delete"/>
+</form>
+{% endfor %}
+
+
+
+
+{% if api_error %}
+<b>Getting the API terms failed!</b>
+Did you set the API token?
+{% endif %}
+
+
+{% endblock %}
