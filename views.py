@@ -8,7 +8,7 @@ def index():
     options = {}
 
     if 'backpack' not in session:
-        session['backpack'] = []
+        session['backpack'] = {}
 
     try:
         options['terms'] = get_terms()
