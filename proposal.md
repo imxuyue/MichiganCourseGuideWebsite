@@ -1,20 +1,17 @@
-### Team (your team name here)
+### Team (4 Scheduler)
 ### Team Members
-* first_name last_name (uniqname)
-* first_name last_name (uniqname)
-* first_name last_name (uniqname)
-* first_name last_name (uniqname)
+* Yue Xu (xuyue)
+* Xiaoran Xu (xiaorxu)
+* Juelin Wang (juelinw)
+* Wanying Liu (wanyliu
 
 ### Project Description
-Here, write your overall project description.
-Remember, no more than 4 sentences!
+    This project will be using the University of Michigan’s API to create a website that allows users to browse the courses they are interested in. Using our scheduler, users are able to view classes by term, school, or subject. We will use CSS to make the website more appealing and organized. This website will also allow users to “backpack” classes that they are interested in.
 
 ### Reach Features
 
-#### Reach Feature 1 Name
-description of reach feature 1
+#### 1. Allow users to "backpack" classes
+     This feature allows users to “backpack” classes. On the backpack page, after entering course information (term, school, subject, section, etc.), users can add a specific class into their backpack. 
 
-#### Reach Feature 2 Name
-description of reach feature 2
-
-...
+#### 2.Improve User Interface Using CSS  
+     We are going to make the website more user-friendly with CSS. We will use CSS library, bootstrap to set the style of the website. We will adjust the layout of the web pages and tables, set font, buttons etc. 
