@@ -73,7 +73,12 @@ def get_terms():
     Each item in the list is a dictionary containing:
         ('TermCode', 'TermDescr', 'TermShortDescr') 
     '''
-    return get_data('/Curriculum/SOC/v1/Terms')['getSOCTermsResponse']['Term']
+    data = get_data('/Curriculum/SOC/v1/Terms')['getSOCTermsResponse']['Term']
+    if type(data) is not list:
+        temp_list = [ data ]
+        data = temp_list
+    return data
+
 
 
 def get_schools(term_code):
