@@ -3,14 +3,17 @@
 {% block content %}
 <div id="page">
 	<nav class="navbar navbar-inverse" role="navigation">
-		<div id= "navbar" class="col-sm-offset-4">
+		<div id= "navbar">
 			<ul class="nav navbar-nav">
+				<li align="left" class="navbar-brand" id="name">4 Scheduler</li>
 				<li><a href = "/">Terms</a><li>
 					<li><a href = "/{{TermCode}}">Schools</a></li>
 					<li><a href = "/{{TermCode}}/{{SchoolCode}}">Subjects</a></li>
 					<li><a href = "/{{TermCode}}/{{SchoolCode}}/{{SubjectCode}}">Courses</a></li>
 					<li class="active"><a href = "/{{TermCode}}/{{SchoolCode}}/{{SubjectCode}}/{{CatalogNumber}}">Details<span class="sr-only">(current)</span></a></li>
-					<li><a href="/backpack" target="_blank">Backpack</a><li>
+						</ul>
+			<ul class="nav navbar-nav navbar-right col-sm-1">
+				<li><a href="/backpack" target="_blank">Backpack</a><li>
 					</ul>
 
 				</div></nav>
