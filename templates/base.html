@@ -2,18 +2,24 @@
     <html>
     <head>
       {% block head %}
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>4 Scheduler</title>
       <link rel="icon" href="http://umich.edu/favicon.ico" type="image/x-icon">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
-      <link rel="stylesheet" href="{{url_for('static',filename="style.css")}}">
+      <link rel="stylesheet" href="{{url_for('static',filename="xuxiaoran.css")}}">
+
+      <script src="{{url_for('static',filename="jquery.js")}}"></script>
+      <script src="{{url_for('static',filename="bootstrap.min.js")}}"></script>
+
 
     </head>
 
     {% endblock %}
 
     <body>
-      <div class="container-fluid">
 
           <div class="content">{% block content %}{% endblock %}
           </div>
@@ -25,6 +31,6 @@
            {% endblock %}
           </div>
         </div>
-      </div>
+        
     </body>
     </html>
