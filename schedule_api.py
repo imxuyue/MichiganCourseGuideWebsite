@@ -82,12 +82,21 @@ def get_schools(term_code):
     '''
     term = str(term_code)
     path = '/Curriculum/SOC/v1/Terms/' + term + '/Schools'
-    return get_data(path)['getSOCSchoolsResponse']['School']
+    data = get_data(path)['getSOCSchoolsResponse']['School']
+    if type(data) is not list:
+        temp_list = [ data ]
+        data = temp_list
+    return data
 
+    
 def get_subjects(term_code, schoolcode):
     term = str(term_code)
     path = '/Curriculum/SOC/v1/Terms/' + term + '/Schools/' + schoolcode + '/Subjects'
-    return get_data(path)['getSOCSubjectsResponse']['Subject']
+    data = get_data(path)['getSOCSubjectsResponse']['Subject']
+    if type(data) is not list:
+        temp_list = [ data ]
+        data = temp_list
+    return data
 
 def get_courses(term_code, schoolcode, subjectcode):
     term = str(term_code)
