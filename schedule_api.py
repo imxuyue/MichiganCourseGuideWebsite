@@ -68,26 +68,16 @@ def get_data(relative_path):
     return json.loads(r.read())
 
 def get_terms():
-<<<<<<< HEAD
-    path = '/Curriculum/SOC/v1/Terms'
-    data = get_data(path)['getSOCTermsResponse']['Term']
-
-=======
     '''
     Returns a list of valid terms.
     Each item in the list is a dictionary containing:
         ('TermCode', 'TermDescr', 'TermShortDescr') 
     '''
     data = get_data('/Curriculum/SOC/v1/Terms')['getSOCTermsResponse']['Term']
->>>>>>> FETCH_HEAD
     if type(data) is not list:
         temp_list = [ data ]
         data = temp_list
     return data
-<<<<<<< HEAD
-=======
-
->>>>>>> FETCH_HEAD
 
 
 def get_schools(term_code):
