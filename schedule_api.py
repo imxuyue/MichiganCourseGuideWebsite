@@ -84,17 +84,14 @@ def get_schools(term_code):
     path = '/Curriculum/SOC/v1/Terms/' + term + '/Schools'
     return get_data(path)['getSOCSchoolsResponse']['School']
 
-def get_subjects(term_code, school_code):
+def get_subjects(term_code, schoolcode):
     term = str(term_code)
-    school = school_code
-    path = '/Curriculum/SOC/v1/Terms/' + term + '/Schools/' + school + '/Subjects'
+    path = '/Curriculum/SOC/v1/Terms/' + term + '/Schools/' + schoolcode + '/Subjects'
     return get_data(path)['getSOCSubjectsResponse']['Subject']
 
-def get_courses(term_code, school_code, subject_code):
+def get_courses(term_code, schoolcode, subjectcode):
     term = str(term_code)
-    school = str(school_code)
-    subject = str(subject_code)
-    path = '/Curriculum/SOC/v1/Terms/' + term + '/Schools/' + school + '/Subjects/' + subject +'/CatalogNbrs'
+    path = '/Curriculum/SOC/v1/Terms/' + term + '/Schools/' + schoolcode + '/Subjects/' + subjectcode +'/CatalogNbrs'
     
     data = get_data(path)['getSOCCtlgNbrsResponse']['ClassOffered']
     if type(data) is not list:
@@ -102,21 +99,16 @@ def get_courses(term_code, school_code, subject_code):
         data = temp_list
     return data
 
-def get_course_descr(term_code, school_code, subject_code, course_code):
+def get_courseDescr(term_code, schoolcode, subjectcode, catalognbr):
     term = str(term_code)
-    school = str(school_code)
-    subject = str(subject_code)
-    course = str(course_code)
-    path = '/Curriculum/SOC/v1/Terms/' + term + '/Schools/' + school + '/Subjects/' + subject +'/CatalogNbrs/' + course
+    catalog= str(catalognbr)
+    path = '/Curriculum/SOC/v1/Terms/' + term + '/Schools/' + schoolcode + '/Subjects/' + subjectcode +'/CatalogNbrs/' + catalog
     return get_data(path)['getSOCCourseDescrResponse']['CourseDescr']
 
-def get_sections(term_code, school_code, subject_code, course_code):
+def get_sections(term_code, schoolcode, subjectcode, catalognbr):
     term = str(term_code)
-    school = str(school_code)
-    subject = str(subject_code)
-    course = str(course_code)
-    path = '/Curriculum/SOC/v1/Terms/' + term + '/Schools/' + school + '/Subjects/' + subject +'/CatalogNbrs/' + \
-            course + '/Sections'
+    catalog= str(catalognbr)
+    path = '/Curriculum/SOC/v1/Terms/' + term + '/Schools/' + schoolcode + '/Subjects/' + subjectcode +'/CatalogNbrs/' + catalog + '/Sections'
     data = get_data(path)['getSOCSectionsResponse']['Section']
     if type(data) is not list:
         temp_list = [ data ]

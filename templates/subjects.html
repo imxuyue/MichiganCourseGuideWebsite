@@ -1,40 +1,46 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div id="page">
+	<nav class="navbar navbar-inverse" role="navigation">
+		<div id= "navbar" class="col-sm-offset-4">
+			<ul class="nav navbar-nav">
+				<li><a href = "/">Terms</a></li>
+				<li><a href = "/{{TermCode}}">Schools</a></li>
+				<li class="active"><a href = "/{{TermCode}}/{{SchoolCode}}">Subjects<span class="sr-only">(current)</span></a></li>
+				<li role="presentation" class="disabled"><a href = "#">Courses</a></li>
+				<li role="presentation" class="disabled"><a href = "#">Details</a></li>
+				<li><a href="/backpack" target="_blank">Backpack</a><li>
+				</ul>
 
+			</div></nav>
 
+				<div id="current"><h3>
+					{% for term in terms %}
+					{% if term['TermCode'] == TermCode %}
+					{{term['TermDescr']}}
+					{% endif %}
+					{% endfor %}<br>
 
-{% for term in terms %}
-	{% if term['TermCode'] == TermCode %}
-		<h1>{{term['TermDescr']}}</h1>
-	{% endif %}
-{% endfor %}
+					{% for school in schools %}
+					{% if school['SchoolCode'] == SchoolCode %}
+					{{school['SchoolDescr']}}
+					{% endif %}
+					{% endfor %}</h3><br></div>
 
-{% for school in schools %}
-	{% if school['SchoolCode'] == SchoolCode %}
-		<h2>{{school['SchoolDescr']}}</h2>
-	{% endif %}
-{% endfor %}
+					<h4>Subjects:</h4>
 
+					<h3>
+						{% for subject in subjects %}
+						<div id="lists" class="col-sm-4" align="left">
+							<a href = "/{{TermCode}}/{{SchoolCode}}/{{ subject['SubjectCode'] }}"> 
+								{{ subject['SubjectDescr']}}</a></div>
+								{% endfor %}
+							</div>
 
- <h2>Subjects:</h2>
-		
-
-		{% for subject in subjects %}
-		<a href = "/terms/{{TermCode}}/schools/{{SchoolCode}}/subjects/{{subject['SubjectCode']}}">{{ subject['SubjectDescr']}} </a><br>
-	
-		{% endfor %}
-
-		{% if api_error %}
-		<b>Getting the API terms failed!</b>
-		Did you set the API token?
-		{% endif %}
-
-
-{% if api_error %}
-<b>Getting the API terms failed!</b>
-Did you set the API token?
-{% endif %}
-
-
-{% endblock %}
+							{% if api_error %}
+							<b>Getting the API terms failed!</b>
+							Did you set the API token?
+							{% endif %}
+						</div>
+						{% endblock %}

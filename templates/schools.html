@@ -1,24 +1,40 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div id="page">
+	<nav class="navbar navbar-inverse" role="navigation">
+		<div id= "navbar" class="col-sm-offset-4">
+			<ul class="nav navbar-nav">
+				<li><a href = "/">Terms</a><li>
+					<li class="active"><a href = "/{{TermCode}}">Schools<span class="sr-only">(current)</span></a></li>
+					<li role="presentation" class="disabled"><a href = "#">Subjects</a></li>
+					<li role="presentation" class="disabled"><a href = "#">Courses</a></li>
+					<li role="presentation" class="disabled"><a href = "#">Details</a></li>
+					<li><a href="/backpack" target="_blank">Backpack</a><li>
+					</ul>
 
+				</div></nav>
 
+				<div id="current"><h3>
+					{% for term in terms %}
+					{% if term['TermCode'] == TermCode %}
+					{{term['TermDescr']}}
+					{% endif %}
+					{% endfor %}</h3><br></div>
 
-{% for term in terms %}
-    {% if term['TermCode'] == TermCode %}
-    	<h1>{{term['TermDescr']}}</h1>
-    {% endif %}
-{% endfor %}
+					<h4>Schools:</h4>
 
+					<h3>
+						{% for school in schools %} 
+						<div id= "lists" class="col-sm-4" align="left">
+							<a href = "/{{TermCode}}/{{ school['SchoolCode']}}"> 
+								{{ school['SchoolDescr'] }} </a></div>
+								{% endfor %}
+							</div>
 
-<br><h2> The schools returned from the schedule API are: </h2>
-{% for school in schools %}
-    <a href = "/terms/{{TermCode}}/schools/{{ school['SchoolCode']}}">{{ school['SchoolDescr']}}</a><br>
-{% endfor %}
-
-{% if api_error %}
-<b>Getting the API terms failed!</b>
-Did you set the API token?
-{% endif %}
-
-{% endblock %}
+							{% if api_error %}
+							<b>Getting the API terms failed!</b>
+							Did you set the API token?
+							{% endif %}
+						</div>
+						{% endblock %}

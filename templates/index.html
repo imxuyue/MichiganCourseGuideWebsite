@@ -1,19 +1,32 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div id="terms">
+	<nav class="navbar navbar-inverse" role="navigation">
+		<div id= "navbar" class="col-sm-offset-4">
+			<ul class="nav navbar-nav">
+				<li class="active"><a href = "/">Terms<span class="sr-only">(current)</span></a><li>
+					<li role="presentation" class="disabled"><a href = "#">Schools</a></li>
+					<li role="presentation" class="disabled"><a href = "#">Subjects</a></li>
+					<li role="presentation" class="disabled"><a href = "#">Courses</a></li>
+					<li role="presentation" class="disabled"><a href = "#">Details</a></li>
+					<li><a href="/backpack" target="_blank">Backpack</a><li>
+					</ul>
 
-<br><h2> The terms returned from the schedule API are: </h2>
-{% for term in terms %}
-    <a href="/terms/{{ term['TermCode']}}">{{ term['TermDescr']}} </a> <br>
-{% endfor %}
-
-{% if api_error %}
-<b>Getting the API terms failed!</b>
-Did you set the API token?
-{% endif %}
-
- 
-<h2><a href = "/backpack" target="_blank">backpack</a></h2>
-
-
-{% endblock %}
+				</div></nav><br><br><br><br>
+				<h2>
+					<div id="Term">
+						<div>{% for term in terms %}
+							<a href = "/{{ term['TermCode']}}"> 
+								<button type="botton" class="btn btn-success" >
+									{{ term['TermDescr'] }} </button></a>
+									{% endfor %}
+								</div>
+								{% if api_error %}
+								<b>Getting the API terms failed!</b>
+								Did you set the API token?
+								{% endif %}
+							</h2>
+						</div>
+					</div>
+					{% endblock %}

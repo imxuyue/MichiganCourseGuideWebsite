@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="page">
+	<nav class="navbar navbar-inverse" role="navigation">
+		<div id= "navbar" class="col-sm-offset-4">
+			<ul class="nav navbar-nav">
+				<li><a href = "/">Terms</a><li>
+					<li><a href = "/{{TermCode}}">Schools</a></li>
+					<li><a href = "/{{TermCode}}/{{SchoolCode}}">Subjects</a></li>
+					<li><a href = "/{{TermCode}}/{{SchoolCode}}/{{SubjectCode}}">Courses</a></li>
+					<li class="active"><a href = "/{{TermCode}}/{{SchoolCode}}/{{SubjectCode}}/{{CatalogNumber}}">Details<span class="sr-only">(current)</span></a></li>
+					<li><a href="/backpack" target="_blank">Backpack</a><li>
+					</ul>
+
+				</div></nav>
+				<div id="current"><h3>
+					{% for term in terms %}
+					{% if term['TermCode'] == TermCode %}
+					{{term['TermDescr']}}
+					{% endif %}
+					{% endfor %}<br>
+
+					{% for school in schools %}
+					{% if school['SchoolCode'] == SchoolCode %}
+					{{school['SchoolDescr']}}
+					{% endif %}
+					{% endfor %}<br>
+
+					{% for subject in subjects %}
+					{% if subject['SubjectCode'] == SubjectCode %}
+					{{subject['SubjectDescr']}}<br><br></h3>
+					<h4>
+						{{subject['SubjectCode']}}
+						{% endif %}
+						{% endfor %}
+
+						{% for course in courses %}
+						{% if course['CatalogNumber'] == CatalogNumber %}
+						{{course['CatalogNumber']}}
+						{% endif %}
+						{% endfor %}<br></h4></div><br>
+
+						<div id="section" class="panel panel-primary">
+							<div class="panel-heading">Sections:</div>
+							<div id="enroll">
+							<table class="table table-striped">
+								<tr>
+									<td>Section No.</td>
+									<td>Section Type</td>
+									<td>Enrollment Status</td>
+									<td>Available Seats</td>
+									<td>Wait List Total</td>
+									<td>Meeting Times</td>
+									<td></td>
+								</tr>
+								{% for section in sections %}
+								<tr>
+									<td>{{ section['SectionNumber'] }}</td>
+									<td>{{ section['SectionType'] }}</td>
+									<td>
+										{% if section['EnrollmentStatus'] == 'Open' %}
+										<span class="label label-success">{{ section['EnrollmentStatus'] }}</span>
+										{% else %}
+										<span class="label label-danger">{{ section['EnrollmentStatus'] }}</span>
+										{% endif %}
+									</td>
+									<td>{{ section['AvailableSeats'] }}</td>
+									<td>{{ section['WaitTotal'] }}</td>
+                                    <td>{{ section['Meeting']['Days']}} {{ section['Meeting']['Times']}}</td>
+                                    <td>
+                                    	<form method="post">
+                                    		<input type="hidden" name="SectionNumber" value="{{ section['SectionNumber'] }}"/>
+                                    		<input type="hidden" name="EnrollmentStatus" value="{{ section['EnrollmentStatus'] }}"/>
+                                    		<input type="hidden" name="Days" value="{{section['Meeting']['Days']}}" />
+                                    		<input type="hidden" name="Times" value="{{section['Meeting']['Times']}}" />
+                                    		<button type="submit" class="btn btn-default btn-xs" name="submitButton" value="{{SubjectCode}}&nbsp;{{CatalogNumber}}">Backpack!!</button>
+                                    	</form>
+                                    </td>
+								</tr>
+								{% endfor %}
+							</table>
+						</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				</div>
+
+																{% if api_error %}
+																<b>Getting the API terms failed!</b>
+																Did you set the API token?
+																{% endif %}
+
+
+
+																{% endblock %}

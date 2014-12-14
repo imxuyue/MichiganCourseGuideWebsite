@@ -1,35 +1,62 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div id="page">
+    <nav class="navbar navbar-inverse" role="navigation">
+        <div id= "navbar" class="col-sm-offset-4">
+            <ul class="nav navbar-nav">
+                <li><a href = "/">Terms</a><li>
+                    <li><a href = "/{{TermCode}}">Schools</a></li>
+                    <li><a href = "/{{TermCode}}/{{SchoolCode}}">Subjects</a></li>
+                    <li><a href = "/{{TermCode}}/{{SchoolCode}}/{{SubjectCode}}">Courses</a></li>
+                    <li><a href = "/{{TermCode}}/{{SchoolCode}}/{{SubjectCode}}/{{CatalogNumber}}">Details</a></li>
+                    <li class="active"><a href="/backpack" target="_blank">Backpack<span class="sr-only">(current)</span></a><li>
+                    </ul>
+                </div></nav><br><br><br><br>
 
-{{session['backpack']}}
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">Classes Backpacked:</h4>
+                    </div>
+                    <table class="table table-striped">
+                        <tr>
+                            <td>Class</td>
+                            <td>Section #</td>
+                            <td>Enrollment Status</td>
+                            <td>Meeting Times</td>
+                            <td></td>
+                        </tr>
+                        
 
-<h2> classes backpacked: </h2>
+                        {% for class in backpack %}
+                        <tr>
+                            <td>{{ class }}</td>
+                            <td>{{ backpack[class][0] }}</td>
+                            <td>
+                                {% if backpack[class][1] == 'Open' %}
+                                <span class="label label-success">{{ backpack[class][1] }}</span>
+                                {% else %}
+                                <span class="label label-danger">{{ backpack[class][1] }}</span>
+                                {% endif %}
+                            </td>
+                            <td>{{backpack[class][2]}} {{backpack[class][3]}}</td>
+                            <td>
+                                <form method="post" >   
+                                    <input type="hidden" name="param1" value="{{class}}" />
+                                    <input type="submit" class="btn btn-default btn-xs" name="submitButton" value="delete"/>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
 
-{% for class in backpack %}
-<div> 
-    <ul>
-    	<li>{{ class }}</li>
-		<ul>
-			{% for item in backpack[class] %}
-    			<li>{{item}}</li>
-    		{% endfor %}
-    	</ul>
-    </ul>
-</div>
-<form method="post" >	
-    <input type="hidden" name="param1" value="{{class}}" />
-    <input type="submit" name="submitButton" value="delete"/>
-</form>
-{% endfor %}
-
-
-
-
-{% if api_error %}
-<b>Getting the API terms failed!</b>
-Did you set the API token?
-{% endif %}
-
+        {% if api_error %}
+        <b>Getting the API terms failed!</b>
+        Did you set the API token?
+        {% endif %}
+    </div>
 
 {% endblock %}
