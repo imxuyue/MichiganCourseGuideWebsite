@@ -117,6 +117,7 @@ def classinfo(term_code, schoolcode, subjectcode, catalognbr):
         options['CatalogNumber'] = str(catalognbr)
         options['CourseDescr'] = get_courseDescr(term_code, schoolcode, subjectcode, catalognbr)
         options['sections'] = get_sections(term_code, schoolcode, subjectcode, catalognbr)
+        options['backpack'] = session['backpack']['items']
         
         '''
         options['days'] = 'None'
