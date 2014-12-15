@@ -74,7 +74,6 @@ def get_terms():
         ('TermCode', 'TermDescr', 'TermShortDescr') 
     '''
     data = get_data('/Curriculum/SOC/v1/Terms')['getSOCTermsResponse']['Term']
-
     if type(data) is not list:
         temp_list = [ data ]
         data = temp_list
