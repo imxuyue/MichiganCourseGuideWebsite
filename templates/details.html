@@ -134,8 +134,12 @@
 										<td>{{ section['WaitTotal'] }}</td>
 										<td>
 											{% for instructor in section['ClassInstructors'] %}
-												<a href="mailto:{{ instructor['InstrUniqname']}}@umich.edu">
-													{{ instructor['InstrName']}}</a><br>
+											{% if instructor['InstrName'] == 'TBA'%}
+											{{ instructor['InstrName']}}
+											{% else %}
+											<a href="mailto:{{ instructor['InstrUniqname']}}@umich.edu">
+												{{ instructor['InstrName']}}</a><br>
+											{% endif %}
 											{% endfor %}
 										</td>
 										
