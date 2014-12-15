@@ -125,14 +125,17 @@ def classinfo(term_code, schoolcode, subjectcode, catalognbr):
         options['api_error'] = True
 
     for section in options['sections']:
+        
+        if 'Meeting' not in section:
+            section['Meeting'] = {'Days': 'TBA', 'Times': 'TBA'}
         meeting = section['Meeting']
         if type(meeting) is not list:
             temp_list = [ meeting ]
             section['Meeting'] = temp_list
 
+
         if 'ClassInstructors' not in section:
             section['ClassInstructors'] = {'InstrName': 'TBA'}
-
         instructor = section['ClassInstructors']
         if type(instructor) is not list:
             temp_list2 = [ instructor ]
@@ -151,6 +154,7 @@ def classinfo(term_code, schoolcode, subjectcode, catalognbr):
             section['CombinedDaysTimes'] += str(meeting['Times'])
             section['CombinedDaysTimes'] += '  '
             section['MeetingCount'] +=1
+        
 
         '''
         section['CombinedDays'] = ''
