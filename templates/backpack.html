@@ -7,13 +7,13 @@
             <ul class="nav navbar-nav">
                 <li align="left" class="navbar-brand" id="name">4 Scheduler</li>
                 <li><a href = "/">Terms</a><li>
-                    <li><a href = "/{{TermCode}}">Schools</a></li>
-                    <li><a href = "/{{TermCode}}/{{SchoolCode}}">Subjects</a></li>
-                    <li><a href = "/{{TermCode}}/{{SchoolCode}}/{{SubjectCode}}">Courses</a></li>
-                    <li><a href = "/{{TermCode}}/{{SchoolCode}}/{{SubjectCode}}/{{CatalogNumber}}">Details</a></li>
+                    <li><a href = "/{{backpack['path']['Term']}}">Schools</a></li>
+                    <li><a href = "/{{backpack['path']['Term']}}/{{backpack['path']['School']}}">Subjects</a></li>
+                    <li><a href = "/{{backpack['path']['Term']}}/{{backpack['path']['School']}}/{{backpack['path']['Subject']}}">Courses</a></li>
+                    <li><a href = "/{{backpack['path']['Term']}}/{{backpack['path']['School']}}/{{backpack['path']['Subject']}}/{{backpack['path']['Course']}}">Details</a></li>
                         </ul>
             <ul class="nav navbar-nav navbar-right col-sm-1">
-                <li class="active"><a href="/backpack" target="_blank"><i class="fa fa-suitcase"></i>&nbsp;Backpack<span class="sr-only">(current)</span></a><li>
+                <li class="active"><a href="/backpack" target="_blank">Backpack<span class="sr-only">(current)</span></a><li>
                     </ul>
                 </div></nav><br><br><br><br>
 
@@ -26,23 +26,27 @@
                             <td>Class</td>
                             <td>Section #</td>
                             <td>Enrollment Status</td>
+                            <td>Available Seats</td>
+                            <td>Waitlist Total</td>
                             <td>Meeting Times</td>
                             <td></td>
                         </tr>
                         
 
-                        {% for class in backpack %}
+                        {% for class in backpack['items'] %}
                         <tr>
                             <td>{{ class }}</td>
-                            <td>{{ backpack[class][0] }}</td>
+                            <td>{{ backpack['items'][class]['SectionNumber'] }}</td>
                             <td>
-                                {% if backpack[class][1] == 'Open' %}
-                                <span class="label label-success">{{ backpack[class][1] }}</span>
+                                {% if backpack['items'][class]['EnrollmentStatus'] == 'Open' %}
+                                <span class="label label-success">{{ backpack['items'][class]['EnrollmentStatus'] }}</span>
                                 {% else %}
-                                <span class="label label-danger">{{ backpack[class][1] }}</span>
+                                <span class="label label-danger">{{ backpack['items'][class]['EnrollmentStatus'] }}</span>
                                 {% endif %}
                             </td>
-                            <td>{{backpack[class][2]}} {{backpack[class][3]}}</td>
+                            <td>{{backpack['items'][class]['AvailableSeats']}}</td>
+                            <td>{{backpack['items'][class]['WaitTotal']}}</td>
+                            <td>{{backpack['items'][class]['CombinedDays']}}<br> {{backpack['items'][class]['CombinedTimes']}}</td>
                             <td>
                                 <form method="post" >   
                                     <input type="hidden" name="param1" value="{{class}}" />
@@ -55,6 +59,7 @@
                 </div>
             </div>
         </div>
+
 
         {% if api_error %}
         <b>Getting the API terms failed!</b>
