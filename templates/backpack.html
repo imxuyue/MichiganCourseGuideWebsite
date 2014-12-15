@@ -96,9 +96,11 @@
                                     <tr>
                                         <th>Class</th>
                                         <th>Section #</th>
+                                        <th>Section Type</th>
                                         <th>Enrollment Status</th>
                                         <th>Available Seats</th>
                                         <th>Wait List Total</th>
+                                        <th>Instructor</th>
                                         <th>Meeting Times</th>
                                         <th></th>
                                     </tr>
@@ -106,8 +108,9 @@
                                 <tbody>
                                     {% for class in backpack['items'] %}
                                     <tr>
-                                        <td>{{ class }}</td>
+                                        <td>{{ backpack['items'][class]['SubjectCode'] }} {{ backpack['items'][class]['CatalogNumber'] }}</td>
                                         <td>{{ backpack['items'][class]['SectionNumber'] }}</td>
+                                        <td>{{ backpack['items'][class]['SectionType'] }}</td>
                                         <td>
                                             {% if backpack['items'][class]['EnrollmentStatus'] == 'Open' %}
                                             <span class="label label-success">{{ backpack['items'][class]['EnrollmentStatus'] }}</span>
@@ -117,8 +120,9 @@
                                         </td>
                                         <td>{{backpack['items'][class]['AvailableSeats']}}</td>
                                         <td>{{backpack['items'][class]['WaitTotal']}}</td>
+                                        <td>{{backpack['items'][class]['InstrName']}}</td>
                                         <td>
-                                            {{backpack['items'][class]['CombinedDays']}}<br> {{backpack['items'][class]['CombinedTimes']}}
+                                            {{backpack['items'][class]['CombinedDaysTimes']}}
                                         </td>
                                         <td>
                                             <form method="post" >   

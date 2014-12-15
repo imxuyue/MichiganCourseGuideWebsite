@@ -74,16 +74,18 @@ def classinfo(term_code, schoolcode, subjectcode, catalognbr):
     if request.method == 'POST':
         
         session['backpack']['items'][request.form['submitButton']] = {}
+        session['backpack']['items'][request.form['submitButton']]['SubjectCode'] = (request.form['SubjectCode'])
+        session['backpack']['items'][request.form['submitButton']]['CatalogNumber'] = (request.form['CatalogNumber'])
         session['backpack']['items'][request.form['submitButton']]['SectionNumber'] = (request.form['SectionNumber'])
+        session['backpack']['items'][request.form['submitButton']]['SectionType'] = (request.form['SectionType'])
         session['backpack']['items'][request.form['submitButton']]['EnrollmentStatus'] = (request.form['EnrollmentStatus'])
-        '''
-        session['backpack']['items'][request.form['submitButton']]['Times'] = (request.form['Times'])
-        '''
         session['backpack']['items'][request.form['submitButton']]['CombinedDays'] = (request.form['CombinedDays'])
         session['backpack']['items'][request.form['submitButton']]['CombinedTimes'] = (request.form['CombinedTimes'])
+        session['backpack']['items'][request.form['submitButton']]['CombinedDaysTimes'] = (request.form['CombinedDaysTimes'])
         session['backpack']['items'][request.form['submitButton']]['MeetingCount'] = (request.form['MeetingCount'])
         session['backpack']['items'][request.form['submitButton']]['AvailableSeats'] = (request.form['AvailableSeats'])
         session['backpack']['items'][request.form['submitButton']]['WaitTotal'] = (request.form['WaitTotal'])
+        session['backpack']['items'][request.form['submitButton']]['InstrName'] = (request.form['InstrName'])
 
         session['backpack']['path'] = {}
         session['backpack']['path']['Term'] = (request.form['Term'])
@@ -91,17 +93,6 @@ def classinfo(term_code, schoolcode, subjectcode, catalognbr):
         session['backpack']['path']['Subject'] = (request.form['Subject'])
         session['backpack']['path']['Course'] = (request.form['Course'])
 
-
-        
-        '''
-        session['backpack'][request.form['submitButton']]['DaysTimes'] = []
-    
-        counter = 0
-        while counter < session['backpack'][request.form['submitButton']]['MeetingCount']:
-            temp1 = 'Days' + str(counter)
-            session['backpack'][request.form['submitButton']]['DaysTimes'].append(request.form[temp1])
-            counter += 1
-        '''
 
 
         return redirect ("/backpack")
@@ -138,7 +129,30 @@ def classinfo(term_code, schoolcode, subjectcode, catalognbr):
         if type(meeting) is not list:
             temp_list = [ meeting ]
             section['Meeting'] = temp_list
+
+        if 'ClassInstructors' not in section:
+            section['ClassInstructors'] = {'InstrName': 'TBA'}
+
+        instructor = section['ClassInstructors']
+        if type(instructor) is not list:
+            temp_list2 = [ instructor ]
+            section["ClassInstructors"] = temp_list2
+
+        section['CombinedInstructors'] = ''
+        for instructor in section['ClassInstructors']:
+            section['CombinedInstructors'] += str(instructor['InstrName'])
+            section['CombinedInstructors'] += ' '
         
+        section['CombinedDaysTimes'] = ''
+        section['MeetingCount'] = 0
+        for meeting in section['Meeting']:
+            section['CombinedDaysTimes'] += str(meeting['Days'])
+            section['CombinedDaysTimes'] += ' '
+            section['CombinedDaysTimes'] += str(meeting['Times'])
+            section['CombinedDaysTimes'] += '  '
+            section['MeetingCount'] +=1
+
+        '''
         section['CombinedDays'] = ''
         section['MeetingCount'] = 0
         for meeting in section['Meeting']:
@@ -150,6 +164,7 @@ def classinfo(term_code, schoolcode, subjectcode, catalognbr):
         for meeting in section['Meeting']:
             section['CombinedTimes'] += str(meeting['Times'])
             section['CombinedTimes'] += ' '
+        '''
         
     
     return render_template('details.html', **options)
@@ -161,6 +176,7 @@ def backpack():
     if 'backpack' not in session:
         session['backpack'] = {}
         session['backpack']['items'] = {}
+        session['backpack']['path'] = {}
     
     if request.method == 'POST':
         del session['backpack']['items'][request.form['param1']]
