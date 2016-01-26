@@ -4,7 +4,7 @@ Heroku: http://f-scheduler.herokuapp.com
 * Yue Xu (xuyue)
 * Xiaoran Xu (xiaorxu)
 * Juelin Wang (juelinw)
-* Wanying Liu (wanyliu
+* Wanying Liu (wanyliu)
 
 ### Project Description
     This project will be using the University of Michigan’s API to create a website that allows users to browse the courses they are interested in. Using our scheduler, users are able to view classes by term, school, or subject. We will use CSS to make the website more appealing and organized. This website will also allow users to “backpack” classes that they are interested in.

@@ -10,24 +10,29 @@ def index():
     if 'backpack' not in session:
         session['backpack'] = {}
         session['backpack']['items'] = {}
+        session['backpack']['path'] = {}
 
     try:
         options['terms'] = get_terms()
     except:
         options['api_error'] = True
 
- 
-    options['backpack'] = session['backpack']
-
     return render_template('index.html', **options)
 
 @app.route('/<term_code>')
 def schools(term_code):
     options = {}
+
+    if 'backpack' not in session:
+        session['backpack'] = {}
+        session['backpack']['items'] = {}
+        session['backpack']['path'] = {}
+
     try:
         options['schools'] = get_schools(term_code)
         options['terms'] = get_terms()
         options['TermCode'] = str(term_code)
+        options['backpack'] = session['backpack']['items']
     except:
         options['api_error'] = True
 
@@ -36,12 +41,18 @@ def schools(term_code):
 @app.route('/<term_code>/<schoolcode>')
 def subjects(term_code,schoolcode):
     options = {}
+    if 'backpack' not in session:
+        session['backpack'] = {}
+        session['backpack']['items'] = {}
+        session['backpack']['path'] = {}
+
     try:
         options['subjects'] = get_subjects(term_code, schoolcode)
         options['SchoolCode'] = schoolcode
         options['schools'] = get_schools(term_code)
         options['terms'] = get_terms()
         options['TermCode'] = str(term_code)
+        options['backpack'] = session['backpack']['items']
     except:
         options['api_error'] = True
 
@@ -50,6 +61,12 @@ def subjects(term_code,schoolcode):
 @app.route('/<term_code>/<schoolcode>/<subjectcode>')
 def courses(term_code,schoolcode,subjectcode):
     options = {}
+    
+    if 'backpack' not in session:
+        session['backpack'] = {}
+        session['backpack']['items'] = {}
+        session['backpack']['path'] = {}
+
     try:
         options['subjects'] = get_subjects(term_code, schoolcode)
         options['SchoolCode'] = schoolcode
@@ -58,6 +75,7 @@ def courses(term_code,schoolcode,subjectcode):
         options['TermCode'] = str(term_code)
         options['courses'] = get_courses(term_code, schoolcode, subjectcode)
         options['SubjectCode'] = subjectcode
+        options['backpack'] = session['backpack']['items']
     except:
         options['api_error'] = True
 
@@ -70,6 +88,7 @@ def classinfo(term_code, schoolcode, subjectcode, catalognbr):
     if 'backpack' not in session:
         session['backpack'] = {}
         session['backpack']['items'] = {}
+        session['backpack']['path'] = {}
  
     if request.method == 'POST':
         
@@ -110,17 +129,6 @@ def classinfo(term_code, schoolcode, subjectcode, catalognbr):
         options['sections'] = get_sections(term_code, schoolcode, subjectcode, catalognbr)
         options['backpack'] = session['backpack']['items']
         
-        '''
-        options['days'] = 'None'
-        for meeting in options['sections']['Meeting']:
-            options['days'] += meeting['Days']
-            options['Days'] += ' '
-
-        options['Times'] = ''
-        for meeting in options['sections']['Meeting']:
-            options['Times'] += meeting['Times']
-            optinos['Times'] += ' '
-        '''
     except:
         options['api_error'] = True
 
@@ -154,21 +162,6 @@ def classinfo(term_code, schoolcode, subjectcode, catalognbr):
             section['CombinedDaysTimes'] += str(meeting['Times'])
             section['CombinedDaysTimes'] += '  '
             section['MeetingCount'] +=1
-        
-
-        '''
-        section['CombinedDays'] = ''
-        section['MeetingCount'] = 0
-        for meeting in section['Meeting']:
-            section['CombinedDays'] += str(meeting['Days'])
-            section['CombinedDays'] += ' '
-            section['MeetingCount'] +=1
-        
-        section['CombinedTimes'] = ''
-        for meeting in section['Meeting']:
-            section['CombinedTimes'] += str(meeting['Times'])
-            section['CombinedTimes'] += ' '
-        '''
         
     
     return render_template('details.html', **options)
