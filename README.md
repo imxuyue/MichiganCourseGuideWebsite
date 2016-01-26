@@ -1,5 +1,5 @@
-### Team (4 Scheduler)
-Heroku: http://f-scheduler.herokuapp.com
+### Team (4 Schedulers)
+
 ### Team Members
 * Yue Xu (xuyue)
 * Xiaoran Xu (xiaorxu)
